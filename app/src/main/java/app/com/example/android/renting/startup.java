@@ -52,7 +52,7 @@ public class startup extends AppCompatActivity {
         enterbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = (new Intent(getApplicationContext(), signup.class));
+                Intent i = (new Intent(getApplicationContext(), login.class));
                 startActivity(i);
             }
         });

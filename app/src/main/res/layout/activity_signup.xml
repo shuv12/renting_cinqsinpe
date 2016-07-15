@@ -169,7 +169,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign Up"
+            android:text="SIGN UP"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/buttonorange"
             android:textColor="@color/white"
