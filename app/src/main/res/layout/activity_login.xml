@@ -45,11 +45,11 @@
         <android.support.design.widget.TextInputLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_marginBottom="5dp">
+            android:theme="@style/TextLabel">
             <EditText
                 android:background="@drawable/edittextbox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:hint="Username or Email"
                 android:singleLine="true"
                 android:layout_marginTop="20dp"
@@ -68,11 +68,13 @@
         <android.support.design.widget.TextInputLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="5dp"
+            android:theme="@style/TextLabel"
+            >
             <EditText
                 android:background="@drawable/edittextbox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:hint="Password"
                 android:drawableLeft="@drawable/password"
                 android:drawablePadding="10dp"
@@ -95,7 +97,6 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/buttonorange"
             android:textColor="@color/white"
-            android:layout_marginTop="5dp"
             android:textSize="15sp"
             android:id="@+id/signinbutton"
             />
