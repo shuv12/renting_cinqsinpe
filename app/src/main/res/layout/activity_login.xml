@@ -70,8 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:layout_marginBottom="5dp"
-            android:theme="@style/TextLabel"
-            >
+            android:theme="@style/TextLabel">
             <EditText
                 android:background="@drawable/edittextbox"
                 android:layout_width="match_parent"

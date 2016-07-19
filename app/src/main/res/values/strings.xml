@@ -1,7 +1,19 @@
 <resources>
     <string name="app_name">Renting</string>
+    <string name="action_settings">Setting</string>
     <string name="startpagetext">Find all kinds of rentals in one place</string>
     <string name="sign_up_note">All fields are compulsory</string>
     <string name="tnc">By signing up, you will accept the Terms and Conditions and Privacy Policy</string>
     <string name="title_activity_maps">Map</string>
+    <string name="drawer_open">Open Navigation Drawer</string>
+    <string name="drawer_closed">Closed Navigation Drawer</string>
+    <string-array name="list_drawer_items">
+        <item>Home</item>
+        <item>Notifications</item>
+        <item>Favourities</item>
+        <item>My profile</item>
+        <item>Settings</item>
+        <item>Logout</item>
+        <item>Make a post</item>
+    </string-array>
 </resources>
