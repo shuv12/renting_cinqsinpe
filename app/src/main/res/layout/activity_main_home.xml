@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:id="@+id/maindrawer"
     tools:context="app.com.example.android.renting.MainHome">
 
@@ -34,6 +35,16 @@
             android:id="@+id/tomapview"
             android:layout_below="@+id/textwel"
             />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Make a post"
+            android:layout_below="@+id/tomapview"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/tonewpost"
+            />
     </RelativeLayout>
 
 
@@ -42,9 +53,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="start|left"
         android:choiceMode="singleChoice"
+        android:background="#CCDA5802"
         android:divider="@android:color/transparent"
         android:dividerHeight="1dp"
-        android:background="@color/white"
         android:id="@+id/drawerlist"
         />
 

@@ -51,6 +51,15 @@ public class MainHome extends ActionBarActivity {
                 startActivity(i);
             }
         });
+
+        Button button1 = (Button) findViewById(R.id.tonewpost);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), NewPost.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void addDrawerItems() {

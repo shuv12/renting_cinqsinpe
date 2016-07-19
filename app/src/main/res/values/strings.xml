@@ -5,8 +5,21 @@
     <string name="sign_up_note">All fields are compulsory</string>
     <string name="tnc">By signing up, you will accept the Terms and Conditions and Privacy Policy</string>
     <string name="title_activity_maps">Map</string>
+    <string name="post_title">Enter title for your string</string>
+    <string name="setloc">Set your location in map : </string>
     <string name="drawer_open">Open Navigation Drawer</string>
+    <string name="tabfeaturetext">Tap the features available in your property:</string>
+    <string name="enterdes">Enter your description about property</string>
     <string name="drawer_closed">Closed Navigation Drawer</string>
+    <string name="doesowner">Do home owner live in same building?</string>
+    <string-array name="mainornot">
+        <item>Main</item>
+        <item>Alley</item>
+    </string-array>
+    <string-array name="yesno">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
     <string-array name="list_drawer_items">
         <item>Home</item>
         <item>Notifications</item>
