@@ -5,8 +5,6 @@
     android:layout_height="match_parent"
     android:scrollbars="none"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="app.com.example.android.renting.NewPost">
     <LinearLayout
@@ -18,9 +16,11 @@
             android:layout_height="40dp"
             android:hint="@string/post_title"
             android:textSize="12sp"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
             android:inputType="text"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginTop="10dp"
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/darker_gray"
@@ -30,17 +30,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:text="NPR"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:gravity="center"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/white"
-                android:background="@android:color/holo_orange_dark"
+                android:background="@drawable/border_left_radius"
                 android:textSize="12sp"
                 />
             <EditText
@@ -48,18 +50,20 @@
                 android:layout_height="40dp"
                 android:hint="Enter price"
                 android:textSize="12sp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:inputType="number"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
-                android:background="@drawable/edittext_background_black"
+                android:background="@drawable/border_right_radius"
                 />
         </LinearLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:text="@string/setloc"
             android:textColor="@android:color/darker_gray"
             android:textSize="12sp"
@@ -69,13 +73,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/map_frag"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             >
             <fragment
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:name="com.google.android.gms.maps.MapFragment"
                 android:id="@+id/map"
-                />
+                tools:layout="@layout/activity_maps" />
         </FrameLayout>
 
         <TextView
@@ -83,6 +89,8 @@
             android:layout_height="wrap_content"
             android:textColor="@android:color/darker_gray"
             android:textSize="12sp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:text="@string/tabfeaturetext"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
@@ -91,18 +99,20 @@
         <HorizontalScrollView
             android:scrollbars="none"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/hscrollv"
+            >
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="10dp"
                 android:background="@drawable/background_tab_icons">
-                <LinearLayout
+                <app.com.example.android.renting.CheckableLinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="20dp"
                     android:gravity="center"
+                    android:background="@drawable/background_tab_icons"
                     android:layout_gravity="center"
                     android:orientation="vertical"
                     android:clickable="true"
@@ -110,19 +120,23 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/parking_icon"
+                        android:duplicateParentState="true"
+                        android:background="@drawable/parking_icon"
+                        android:layout_marginBottom="10dp"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="10sp"
+                        android:duplicateParentState="true"
+                        android:textColor="@drawable/feature_tab_text_color"
                         android:text="Parking Lot"
                         />
-                </LinearLayout>
-                <LinearLayout
+                </app.com.example.android.renting.CheckableLinearLayout>
+                <app.com.example.android.renting.CheckableLinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="20dp"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:orientation="vertical"
@@ -131,19 +145,23 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/water"
+                        android:duplicateParentState="true"
+                        android:background="@drawable/water_icon"
+                        android:layout_marginBottom="10dp"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="10sp"
+                        android:duplicateParentState="true"
+                        android:textColor="@drawable/feature_tab_text_color"
                         android:text="24*7 Water"
                         />
-                </LinearLayout>
-                <LinearLayout
+                </app.com.example.android.renting.CheckableLinearLayout>
+                <app.com.example.android.renting.CheckableLinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="20dp"
                     android:background="@drawable/background_tab_icons"
                     android:gravity="center"
                     android:layout_gravity="center"
@@ -151,20 +169,24 @@
                     android:clickable="true">
                     <ImageView
                         android:layout_width="wrap_content"
+                        android:duplicateParentState="true"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/cable"
+                        android:background="@drawable/cable_icon"
+                        android:layout_marginBottom="10dp"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="10sp"
+                        android:duplicateParentState="true"
                         android:text="TV cable"
+                        android:textColor="@drawable/feature_tab_text_color"
                         />
-                </LinearLayout>
-                <LinearLayout
+                </app.com.example.android.renting.CheckableLinearLayout>
+                <app.com.example.android.renting.CheckableLinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="20dp"
                     android:background="@drawable/background_tab_icons"
                     android:gravity="center"
                     android:layout_gravity="center"
@@ -172,20 +194,49 @@
                     android:clickable="true">
                     <ImageView
                         android:layout_width="wrap_content"
+                        android:duplicateParentState="true"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/internet1"
+                        android:background="@drawable/internet_icon"
+                        android:layout_marginBottom="10dp"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="10sp"
                         android:text="Internet"
+                        android:duplicateParentState="true"
+                        android:textColor="@drawable/feature_tab_text_color"
                         />
-                </LinearLayout>
-                <LinearLayout
+                </app.com.example.android.renting.CheckableLinearLayout>
+                <app.com.example.android.renting.CheckableLinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="20dp"
+                    android:background="@drawable/background_tab_icons"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:clickable="true">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:duplicateParentState="true"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/parking_icon"
+                        android:layout_marginBottom="10dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="10sp"
+                        android:duplicateParentState="true"
+                        android:text="Parking Lot"
+                        android:textColor="@drawable/feature_tab_text_color"
+                        />
+                </app.com.example.android.renting.CheckableLinearLayout>
+                <app.com.example.android.renting.CheckableLinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp"
                     android:background="@drawable/background_tab_icons"
                     android:gravity="center"
                     android:layout_gravity="center"
@@ -194,40 +245,23 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/parking_icon"
+                        android:duplicateParentState="true"
+                        android:background="@drawable/parking_icon"
+                        android:layout_marginBottom="10dp"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:duplicateParentState="true"
                         android:textSize="10sp"
                         android:text="Parking Lot"
+                        android:textColor="@drawable/feature_tab_text_color"
                         />
-                </LinearLayout>
-                <LinearLayout
+                </app.com.example.android.renting.CheckableLinearLayout>
+                <app.com.example.android.renting.CheckableLinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:background="@drawable/background_tab_icons"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:orientation="vertical"
-                    android:clickable="true">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/parking_icon"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="10sp"
-                        android:text="Parking Lot"
-                        />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="20dp"
                     android:gravity="center"
                     android:background="@drawable/background_tab_icons"
                     android:layout_gravity="center"
@@ -236,15 +270,19 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/parking_icon"
+                        android:duplicateParentState="true"
+                        android:background="@drawable/parking_icon"
+                        android:layout_marginBottom="10dp"
                         />
                     <TextView
+                        android:duplicateParentState="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="10sp"
+                        android:textColor="@drawable/feature_tab_text_color"
                         android:text="Parking Lot"
                         />
-                </LinearLayout>
+                </app.com.example.android.renting.CheckableLinearLayout>
             </LinearLayout>
         </HorizontalScrollView>
 
@@ -254,6 +292,8 @@
             android:text="Owner's description:"
             android:textColor="@android:color/darker_gray"
             android:textSize="12sp"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
             />
@@ -262,7 +302,9 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:hint="@string/enterdes"
-            android:padding="10dp"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:background="@drawable/edittext_background_black"
             android:textColorHint="@android:color/darker_gray"
             android:textColor="@android:color/black"
@@ -276,6 +318,8 @@
             android:layout_height="wrap_content"
             android:textColor="@color/orange"
             android:textSize="12sp"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="15dp"
             android:textStyle="italic"
@@ -288,8 +332,9 @@
             android:layout_height="wrap_content"
             android:spinnerMode="dropdown"
             android:padding="10dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:entries="@array/yesno"
-            android:background="@android:drawable/btn_dropdown"
             />
 
         <TextView
@@ -297,6 +342,8 @@
             android:layout_height="wrap_content"
             android:text="Add images of property"
             android:textSize="12sp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:textColor="@android:color/darker_gray"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
@@ -305,6 +352,8 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:src="@drawable/add_house_icon"
             android:id="@+id/add_home_image"
             />
@@ -313,6 +362,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
@@ -334,6 +385,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
@@ -351,7 +404,6 @@
                 android:entries="@array/mainornot"
                 android:spinnerMode="dropdown"
                 android:padding="10dp"
-                android:background="@android:drawable/btn_dropdown"
                 />
         </LinearLayout>
 
@@ -359,6 +411,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
@@ -375,11 +429,7 @@
                 android:entries="@array/yesno"
                 android:spinnerMode="dropdown"
                 android:padding="10dp"
-                android:background="@android:drawable/btn_dropdown"
                 />
-
         </LinearLayout>
-
-
     </LinearLayout>
 </ScrollView>
