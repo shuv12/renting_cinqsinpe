@@ -10,7 +10,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+
 public class NewPost extends AppCompatActivity {
+    private GoogleMap mMap;
     private static final int SELECT_PICTURE = 1;
 
     @Override
@@ -18,31 +23,18 @@ public class NewPost extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_post);
 
+        getGoogleMap();
+        this.mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                NewPost.this.startActivity(new Intent(NewPost.this.getApplicationContext(), GetLocationMapsActivity.class));
+            }
+        });
+
 
         HorizontalScrollView horizontalScrollView = (HorizontalScrollView) findViewById(R.id.hscrollv);
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.translate_left_to_right);
         horizontalScrollView.setAnimation(animation);
-
-
-       /* FrameLayout frameLayout = (FrameLayout) findViewById(R.id.map_frag);
-        frameLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),GetLocationMapsActivity.class);
-                startActivity(intent);
-            }
-        });*/
-
-       /* final LatLng baneshwor = new LatLng(27.280000,87.290000);
-        GoogleMap googleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-        Marker marker = googleMap.addMarker(new MarkerOptions().position(baneshwor).draggable(true).title("SET Location"));
-        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                Intent intent = new Intent(getApplicationContext(),GetLocationMapsActivity.class);
-                startActivity(intent);
-            }
-        });*/
 
 
 
@@ -68,5 +60,15 @@ public class NewPost extends AppCompatActivity {
                 startActivityForResult(chooserIntent,SELECT_PICTURE);
             }
         });
+    }
+
+    private GoogleMap getGoogleMap(){
+        if (!(this.mMap != null || getApplicationContext() == null || getSupportFragmentManager() == null)){
+            SupportMapFragment smf = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+            if (smf != null){
+                this.mMap = smf.getMap();
+            }
+        }
+        return this.mMap;
     }
 }

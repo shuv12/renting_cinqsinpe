@@ -30,6 +30,8 @@ public class MainHome extends ActionBarActivity {
         setContentView(R.layout.activity_main_home);
 
 
+
+
        // final String toastwel = "Hello";
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.maindrawer);

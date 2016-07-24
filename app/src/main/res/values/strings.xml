@@ -29,4 +29,5 @@
         <item>Logout</item>
         <item>Make a post</item>
     </string-array>
+    <string name="title_activity_get_location_maps">Map</string>
 </resources>
