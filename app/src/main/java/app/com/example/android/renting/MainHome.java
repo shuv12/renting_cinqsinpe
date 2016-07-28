@@ -3,12 +3,15 @@ package app.com.example.android.renting;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,6 +19,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainHome extends ActionBarActivity {
+
+    private boolean isFabOpen = false;
+    private FloatingActionButton fab,fab1,fab2;
+    private Animation fab_open, fab_close, fab_rotate_forward, fab_rotate_backward;
 
     private String[] mDrawerListName;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -30,10 +37,6 @@ public class MainHome extends ActionBarActivity {
         setContentView(R.layout.activity_main_home);
 
 
-
-
-       // final String toastwel = "Hello";
-
         mDrawerLayout = (DrawerLayout) findViewById(R.id.maindrawer);
         mDrawerList = (ListView) findViewById(R.id.drawerlist);
         mTitle = getTitle().toString();
@@ -44,6 +47,66 @@ public class MainHome extends ActionBarActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+
+        fab_open = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_open);
+        fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
+        fab_rotate_forward = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_forward_plus_icon);
+        fab_rotate_backward = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_backward_plus_icon);
+
+
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isFabOpen){
+                    fab.startAnimation(fab_rotate_backward);
+                    fab1.startAnimation(fab_close);
+                    fab2.startAnimation(fab_close);
+                    fab2.setClickable(false);
+                    fab1.setClickable(false);
+                    isFabOpen = false;
+                }else {
+                    fab.startAnimation(fab_rotate_forward);
+                    fab1.startAnimation(fab_open);
+                    fab2.startAnimation(fab_open);
+                    fab1.setClickable(true);
+                    fab2.setClickable(true);
+                    isFabOpen = true;
+                }
+            }
+        });
+
+        fab1 = (FloatingActionButton) findViewById(R.id.fab1);
+        fab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), NewPost.class);
+                startActivity(intent);
+            }
+        });
+        fab2 = (FloatingActionButton) findViewById(R.id.fab2);
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isFabOpen){
+                    fab.startAnimation(fab_rotate_backward);
+                    fab1.startAnimation(fab_close);
+                    fab2.startAnimation(fab_close);
+                    fab2.setClickable(false);
+                    fab1.setClickable(false);
+                    isFabOpen = false;
+
+                }else {
+                    fab.startAnimation(fab_rotate_forward);
+                    fab1.startAnimation(fab_open);
+                    fab2.startAnimation(fab_open);
+                    fab1.setClickable(true);
+                    fab2.setClickable(true);
+                    isFabOpen = true;
+                }
+            }
+        });
 
         Button button = (Button) findViewById(R.id.tomapview);
         button.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +196,12 @@ public class MainHome extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+
+        if (id == R.id.show_marker_map) {
+            Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+            startActivity(i);
             return true;
         }
 

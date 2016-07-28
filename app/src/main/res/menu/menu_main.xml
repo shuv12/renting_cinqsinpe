@@ -6,4 +6,9 @@
         android:title="@string/action_settings"
         android:orderInCategory="100"
         app:showAsAction="never"/>
+    <item android:id="@+id/show_marker_map"
+        android:title="Map"
+        android:icon="@drawable/ic_room"
+        app:showAsAction="ifRoom"
+        />
 </menu>
