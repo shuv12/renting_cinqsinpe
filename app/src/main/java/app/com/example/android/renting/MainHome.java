@@ -14,7 +14,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -108,23 +107,6 @@ public class MainHome extends ActionBarActivity {
             }
         });
 
-        Button button = (Button) findViewById(R.id.tomapview);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), MapsActivity.class);
-                startActivity(i);
-            }
-        });
-
-        Button button1 = (Button) findViewById(R.id.tonewpost);
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), NewPost.class);
-                startActivity(intent);
-            }
-        });
     }
 
     private void addDrawerItems() {

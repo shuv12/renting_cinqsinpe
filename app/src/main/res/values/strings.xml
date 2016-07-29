@@ -30,4 +30,6 @@
         <item>Make a post</item>
     </string-array>
     <string name="title_activity_get_location_maps">Map</string>
+    <string name="postedtitle">Residential flat for rent in Newroad</string>
+    <string name="subidha">Subidha yukta flat vadama</string>
 </resources>
