@@ -7,9 +7,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -17,23 +20,64 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import app.com.example.android.renting.model.Rent;
+import jp.wasabeef.blurry.Blurry;
+
 public class MainHome extends ActionBarActivity {
 
     private boolean isFabOpen = false;
     private FloatingActionButton fab,fab1,fab2;
     private Animation fab_open, fab_close, fab_rotate_forward, fab_rotate_backward;
-
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView recyclerView;
+    private List<Rent> rentList;
     private String[] mDrawerListName;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private String mTitle;
+    private boolean blurred = false;
+
+    String[] daysLeft = new String[]{"98 days left", "22 days left"};
+    String[] description = new String[]{"Subidha yukta flat vadma","Only for office"};
+    String[] propertImage = new String[]{"http://plymouthpropertyinventories.co.uk/wp-content/uploads/2013/06/beautiful-property.jpg","http://www.the8000internationalbusinessclub.com/images/business/propertyworks/nice-property.jpg"};
+    String[] profilepic = new String[]{"http://topnews.in/files/Keanu-Reeves-2.jpg","https://pbs.twimg.com/profile_images/703568535436398592/pYhDuLWB.jpg"};
+    String[] profilename = new String[]{"Shuvam", "Akshay"};
+    String[] price = new String[]{"22,000/mo","30,000/mo"};
+    String[] favs = new String[]{"22","34"};
+    String[] views = new String[]{"65","87"};
+    String[] title = new String[]{"Residental flat for rental in New Road", "Office flat for rental in Baneshwor"};
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_home);
+
+        this.rentList = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            Rent rent = new Rent();
+            rent.setImage(this.propertImage[i]);
+            rent.setDaysLeft(this.daysLeft[i]);
+            rent.setDescription(this.description[i]);
+            rent.setPrice(this.price[i]);
+            rent.setFavs(this.favs[i]);
+            rent.setTitle(this.title[i]);
+            rent.setUserProfileName(this.profilename[i]);
+            rent.setUserProfilePic(this.profilepic[i]);
+            rent.setViews(this.views[i]);
+            this.rentList.add(rent);
+        }
+
+        recyclerView = (RecyclerView) findViewById(R.id.recycleViewPost);
+        final RentAdapter rentAdapter = new RentAdapter(getApplicationContext(),this.rentList);
+        recyclerView.setAdapter(rentAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),null));
+
 
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.maindrawer);
@@ -51,7 +95,6 @@ public class MainHome extends ActionBarActivity {
         fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
         fab_rotate_forward = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_forward_plus_icon);
         fab_rotate_backward = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_backward_plus_icon);
-
 
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -73,6 +116,17 @@ public class MainHome extends ActionBarActivity {
                     fab2.setClickable(true);
                     isFabOpen = true;
                 }
+
+                if(blurred){
+                    Blurry.delete((ViewGroup) findViewById(R.id.maindrawer));
+                }
+                else {
+                    long startMs = System.currentTimeMillis();
+                    Blurry.with(getApplicationContext()).radius(25).sampling(2).async().
+                            animate(500).onto((ViewGroup) findViewById(R.id.maindrawer));
+
+                }
+                blurred = !blurred;
             }
         });
 
@@ -104,6 +158,16 @@ public class MainHome extends ActionBarActivity {
                     fab2.setClickable(true);
                     isFabOpen = true;
                 }
+                if(blurred){
+                    Blurry.delete((ViewGroup) findViewById(R.id.maindrawer));
+                }
+                else {
+                    long startMs = System.currentTimeMillis();
+                    Blurry.with(getApplicationContext()).radius(25).sampling(2).async().
+                            animate(500).onto((ViewGroup) findViewById(R.id.maindrawer));
+
+                }
+                blurred = !blurred;
             }
         });
 
@@ -129,6 +193,9 @@ public class MainHome extends ActionBarActivity {
              * Called when a drawer has settled in a completely open state.
              */
             public void onDrawerOpened(View drawerView) {
+                fab.hide();
+                Blurry.with(getApplicationContext()).radius(3).sampling(2).async()
+                        .onto((ViewGroup) findViewById(R.id.maindrawer));
                 super.onDrawerOpened(drawerView);
                 getSupportActionBar().setTitle("Navigation!");
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
@@ -138,8 +205,10 @@ public class MainHome extends ActionBarActivity {
              * Called when a drawer has settled in a completely closed state.
              */
             public void onDrawerClosed(View view) {
+                Blurry.delete((ViewGroup) findViewById(R.id.maindrawer));
                 super.onDrawerClosed(view);
                 getSupportActionBar().setTitle(mTitle);
+                fab.show();
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };

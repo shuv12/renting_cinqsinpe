@@ -19,6 +19,7 @@ public class Rent implements Serializable {
     private String title;
     private String userProfileName;
     private String userProfilePic;
+    private String views;
 
 
     public String getUserProfilePic(){
@@ -116,4 +117,8 @@ public class Rent implements Serializable {
     public void setTitle(String title){
         this.title = title;
     }
+
+    public String getViews() {return this.views;}
+
+    public void setViews(String views){this.views = views;}
 }
