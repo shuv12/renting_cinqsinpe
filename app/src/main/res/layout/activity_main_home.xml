@@ -12,12 +12,20 @@
         android:id="@+id/maindrawer"
         >
 
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
+        <FrameLayout
             android:layout_height="wrap_content"
-            android:id="@+id/recycleViewPost"
-            />
+            android:layout_width="match_parent"
+            android:id="@+id/FramePostView"
+            >
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recycleViewPost"
+                />
+
+        </FrameLayout>
+
 
 
 
@@ -34,6 +42,7 @@
 
 
     </android.support.v4.widget.DrawerLayout>
+
 
     <android.support.design.widget.FloatingActionButton
         android:layout_height="wrap_content"
@@ -68,8 +77,8 @@
         android:src="@drawable/ic_add"
         android:layout_gravity="bottom|right|end"
         android:layout_margin="16dp"
-        app:elevation="6dp"
-        app:layout_behavior="app.com.example.android.renting.ScrollAwareFABBehavior"/>
+        app:elevation="6dp"/>
+        <!--app:layout_behavior="app.com.example.android.renting.ScrollAwareFABBehavior"/>-->
 
 </android.support.design.widget.CoordinatorLayout>
 

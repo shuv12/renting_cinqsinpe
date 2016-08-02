@@ -3,6 +3,7 @@ package app.com.example.android.renting;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -72,11 +73,11 @@ public class MainHome extends ActionBarActivity {
             this.rentList.add(rent);
         }
 
+        layoutManager = new LinearLayoutManager(this);
         recyclerView = (RecyclerView) findViewById(R.id.recycleViewPost);
         final RentAdapter rentAdapter = new RentAdapter(getApplicationContext(),this.rentList);
         recyclerView.setAdapter(rentAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),null));
+        recyclerView.setLayoutManager(layoutManager);
 
 
 
@@ -97,7 +98,13 @@ public class MainHome extends ActionBarActivity {
         fab_rotate_backward = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_backward_plus_icon);
 
 
+
+
         fab = (FloatingActionButton) findViewById(R.id.fab);
+        CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) fab.getLayoutParams();
+        p.setBehavior(new ScrollAwareFABBehavior(getApplicationContext(),null));
+        fab.setLayoutParams(p);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +112,9 @@ public class MainHome extends ActionBarActivity {
                     fab.startAnimation(fab_rotate_backward);
                     fab1.startAnimation(fab_close);
                     fab2.startAnimation(fab_close);
+                    CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) fab.getLayoutParams();
+                    p.setBehavior(new ScrollAwareFABBehavior(getApplicationContext(),null));
+                    fab.setLayoutParams(p);
                     fab2.setClickable(false);
                     fab1.setClickable(false);
                     isFabOpen = false;
@@ -114,21 +124,23 @@ public class MainHome extends ActionBarActivity {
                     fab2.startAnimation(fab_open);
                     fab1.setClickable(true);
                     fab2.setClickable(true);
+                    CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) fab.getLayoutParams();
+                    p.setBehavior(null);
+                    fab.setLayoutParams(p);
                     isFabOpen = true;
                 }
 
                 if(blurred){
-                    Blurry.delete((ViewGroup) findViewById(R.id.maindrawer));
+                    Blurry.delete((ViewGroup) findViewById(R.id.FramePostView));
                 }
                 else {
-                    long startMs = System.currentTimeMillis();
-                    Blurry.with(getApplicationContext()).radius(25).sampling(2).async().
-                            animate(500).onto((ViewGroup) findViewById(R.id.maindrawer));
-
+                    Blurry.with(getApplicationContext()).radius(15).sampling(2).async().
+                            animate(500).onto((ViewGroup) findViewById(R.id.FramePostView));
                 }
                 blurred = !blurred;
             }
         });
+
 
         fab1 = (FloatingActionButton) findViewById(R.id.fab1);
         fab1.setOnClickListener(new View.OnClickListener() {
@@ -138,6 +150,8 @@ public class MainHome extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+
         fab2 = (FloatingActionButton) findViewById(R.id.fab2);
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,26 +160,16 @@ public class MainHome extends ActionBarActivity {
                     fab.startAnimation(fab_rotate_backward);
                     fab1.startAnimation(fab_close);
                     fab2.startAnimation(fab_close);
+                    CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) fab.getLayoutParams();
+                    p.setBehavior(new ScrollAwareFABBehavior(getApplicationContext(),null));
+                    fab.setLayoutParams(p);
                     fab2.setClickable(false);
                     fab1.setClickable(false);
                     isFabOpen = false;
 
-                }else {
-                    fab.startAnimation(fab_rotate_forward);
-                    fab1.startAnimation(fab_open);
-                    fab2.startAnimation(fab_open);
-                    fab1.setClickable(true);
-                    fab2.setClickable(true);
-                    isFabOpen = true;
                 }
                 if(blurred){
-                    Blurry.delete((ViewGroup) findViewById(R.id.maindrawer));
-                }
-                else {
-                    long startMs = System.currentTimeMillis();
-                    Blurry.with(getApplicationContext()).radius(25).sampling(2).async().
-                            animate(500).onto((ViewGroup) findViewById(R.id.maindrawer));
-
+                    Blurry.delete((ViewGroup) findViewById(R.id.FramePostView));
                 }
                 blurred = !blurred;
             }
@@ -194,8 +198,8 @@ public class MainHome extends ActionBarActivity {
              */
             public void onDrawerOpened(View drawerView) {
                 fab.hide();
-                Blurry.with(getApplicationContext()).radius(3).sampling(2).async()
-                        .onto((ViewGroup) findViewById(R.id.maindrawer));
+                Blurry.with(getApplicationContext()).radius(15).sampling(2).async()
+                        .onto((ViewGroup) findViewById(R.id.FramePostView));
                 super.onDrawerOpened(drawerView);
                 getSupportActionBar().setTitle("Navigation!");
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
@@ -205,7 +209,7 @@ public class MainHome extends ActionBarActivity {
              * Called when a drawer has settled in a completely closed state.
              */
             public void onDrawerClosed(View view) {
-                Blurry.delete((ViewGroup) findViewById(R.id.maindrawer));
+                Blurry.delete((ViewGroup) findViewById(R.id.FramePostView));
                 super.onDrawerClosed(view);
                 getSupportActionBar().setTitle(mTitle);
                 fab.show();

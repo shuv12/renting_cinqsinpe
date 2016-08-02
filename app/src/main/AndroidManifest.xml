@@ -58,7 +58,8 @@
         <activity android:name=".NewPost" />
         <activity
             android:name=".GetLocationMapsActivity"
-            android:label="@string/title_activity_get_location_maps"></activity>
+            android:label="@string/title_activity_get_location_maps" />
+        <activity android:name=".PostDetails"></activity>
     </application>
 
 </manifest>
