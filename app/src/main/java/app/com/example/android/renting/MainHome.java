@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -27,7 +27,7 @@ import java.util.List;
 import app.com.example.android.renting.model.Rent;
 import jp.wasabeef.blurry.Blurry;
 
-public class MainHome extends ActionBarActivity {
+public class MainHome extends AppCompatActivity{
 
     private boolean isFabOpen = false;
     private FloatingActionButton fab,fab1,fab2;
@@ -40,6 +40,7 @@ public class MainHome extends ActionBarActivity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private String mTitle;
+    //private ImageButton favImageButton;
     private boolean blurred = false;
 
     String[] daysLeft = new String[]{"98 days left", "22 days left"};
@@ -80,6 +81,13 @@ public class MainHome extends ActionBarActivity {
         recyclerView.setLayoutManager(layoutManager);
 
 
+        /*favImageButton = (ImageButton) findViewById(R.id.postFavImage);
+        favImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                favImageButton.setImageResource(R.drawable.ic_favorite_black);
+            }
+        });*/
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.maindrawer);
         mDrawerList = (ListView) findViewById(R.id.drawerlist);
@@ -197,11 +205,11 @@ public class MainHome extends ActionBarActivity {
              * Called when a drawer has settled in a completely open state.
              */
             public void onDrawerOpened(View drawerView) {
-                fab.hide();
                 Blurry.with(getApplicationContext()).radius(15).sampling(2).async()
                         .onto((ViewGroup) findViewById(R.id.FramePostView));
                 super.onDrawerOpened(drawerView);
                 getSupportActionBar().setTitle("Navigation!");
+                fab.setVisibility(View.GONE);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 

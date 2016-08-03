@@ -38,7 +38,7 @@
         <activity
             android:name=".login"
             android:theme="@style/AppTheme" />
-        <activity android:name=".MainHome" />
+        <activity android:name=".MainHome"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -59,7 +59,7 @@
         <activity
             android:name=".GetLocationMapsActivity"
             android:label="@string/title_activity_get_location_maps" />
-        <activity android:name=".PostDetails"></activity>
+        <activity android:name=".PostDetails"/>
     </application>
 
 </manifest>

@@ -29,7 +29,8 @@ public class ScrollAwareFABBehavior extends FloatingActionButton.Behavior {
         if (dyConsumed > 0 && child.getVisibility() == View.VISIBLE) {
             // User scrolled down and the FAB is currently visible -> hide the FAB
             //animateOut(child);
-            child.hide();
+            child.setVisibility(View.GONE);
+           // View.getSupportActionBar().hide();
         } else if (dyConsumed < 0 && child.getVisibility() != View.VISIBLE) {
             // User scrolled up and the FAB is currently not visible -> show the FAB
             //animateIn(child);

@@ -11,4 +11,5 @@
     <color name="hue">#D3D3AF</color>
     <color name="light_white">#f6efef</color>
     <color name="drawer_color">#83f7f7ff</color>
+    <color name="postborder">#e0e0e0</color>
 </resources>
