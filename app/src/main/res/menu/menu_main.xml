@@ -12,10 +12,4 @@
         android:icon="@drawable/ic_room_white"
         app:showAsAction="ifRoom"
         />
-    <item android:id="@+id/action_search"
-        android:orderInCategory="1"
-        android:title="Search"
-        android:icon="@drawable/ic_search_white"
-        app:showAsAction="ifRoom|collapseActionView"
-        app:actionViewClass="android.support.v7.widget.SearchView" />
 </menu>

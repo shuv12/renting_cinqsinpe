@@ -5,20 +5,21 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -35,12 +36,12 @@ public class MainHome extends AppCompatActivity{
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerView;
     private List<Rent> rentList;
-    private String[] mDrawerListName;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
+    private NavigationView navigationView;
     private String mTitle;
-    //private ImageButton favImageButton;
+    private SearchView searchView;
+
     private boolean blurred = false;
 
     String[] daysLeft = new String[]{"98 days left", "22 days left"};
@@ -89,12 +90,27 @@ public class MainHome extends AppCompatActivity{
             }
         });*/
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.maindrawer);
-        mDrawerList = (ListView) findViewById(R.id.drawerlist);
-        mTitle = getTitle().toString();
+        searchView = (SearchView) findViewById(R.id.search_bar);
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchView.setIconified(false);
+            }
+        });
 
-        addDrawerItems();
-        setupDrawer();
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.maindrawer);
+        //mDrawerList = (ListView) findViewById(R.id.drawerlist);
+        mTitle = getTitle().toString();
+        navigationView = (NavigationView) findViewById(R.id.nvView);
+
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        //ActionBar myactionbar = (ActionBar) findViewById(R.id.my_actionbar);
+        //setSupportActionBar(myactionbar);
+
+        //addDrawerItems();
+        setupDrawer(navigationView);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -138,16 +154,20 @@ public class MainHome extends AppCompatActivity{
                     isFabOpen = true;
                 }
 
+
                 if(blurred){
-                    Blurry.delete((ViewGroup) findViewById(R.id.FramePostView));
+                    Blurry.delete((ViewGroup) findViewById(R.id.nestedViewPost));
                 }
                 else {
                     Blurry.with(getApplicationContext()).radius(15).sampling(2).async().
-                            animate(500).onto((ViewGroup) findViewById(R.id.FramePostView));
+                            animate(500).onto((ViewGroup) findViewById(R.id.nestedViewPost));
                 }
                 blurred = !blurred;
             }
         });
+        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) fab.getLayoutParams();
+        params.setBehavior(new ScrollAwareFABBehavior(getApplicationContext(),null));
+        fab.setLayoutParams(params);
 
 
         fab1 = (FloatingActionButton) findViewById(R.id.fab1);
@@ -177,7 +197,7 @@ public class MainHome extends AppCompatActivity{
 
                 }
                 if(blurred){
-                    Blurry.delete((ViewGroup) findViewById(R.id.FramePostView));
+                    Blurry.delete((ViewGroup) findViewById(R.id.nestedViewPost));
                 }
                 blurred = !blurred;
             }
@@ -185,10 +205,10 @@ public class MainHome extends AppCompatActivity{
 
     }
 
-    private void addDrawerItems() {
+    /*private void addDrawerItems() {
         mDrawerListName = getResources().getStringArray(R.array.list_drawer_items);
         ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mDrawerListName);
-        mDrawerList.setAdapter(mAdapter);
+        navigationView.setAdapter(mAdapter);
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -196,20 +216,30 @@ public class MainHome extends AppCompatActivity{
                 Toast.makeText(getApplicationContext(), "Time for an upgrade!", Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
 
-    private void setupDrawer() {
+    private void setupDrawer(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                selectDrawerItem(item);
+                return true;
+            }
+        });
+
+
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_closed) {
 
             /**
              * Called when a drawer has settled in a completely open state.
              */
             public void onDrawerOpened(View drawerView) {
-                Blurry.with(getApplicationContext()).radius(15).sampling(2).async()
-                        .onto((ViewGroup) findViewById(R.id.FramePostView));
                 super.onDrawerOpened(drawerView);
-                getSupportActionBar().setTitle("Navigation!");
-                fab.setVisibility(View.GONE);
+                //Blurry.with(getApplicationContext()).radius(15).sampling(2).async()
+                  //      .onto((ViewGroup) findViewById(R.id.nestedViewPost));
+                //getSupportActionBar().setTitle("Navigation!");
+                //fab.setVisibility(View.INVISIBLE);
+                //fab.hide();
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
@@ -217,16 +247,74 @@ public class MainHome extends AppCompatActivity{
              * Called when a drawer has settled in a completely closed state.
              */
             public void onDrawerClosed(View view) {
-                Blurry.delete((ViewGroup) findViewById(R.id.FramePostView));
+                Blurry.delete((ViewGroup) findViewById(R.id.nestedViewPost));
                 super.onDrawerClosed(view);
-                getSupportActionBar().setTitle(mTitle);
-                fab.show();
+                //getSupportActionBar().setTitle(mTitle);
+                CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) fab.getLayoutParams();
+                p.setBehavior(new ScrollAwareFABBehavior(getApplicationContext(),null));
+                fab.setLayoutParams(p);
+                fab.setVisibility(View.VISIBLE);
+                //fab.show();
+
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
 
         mDrawerToggle.setDrawerIndicatorEnabled(true);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+    }
+
+    public void selectDrawerItem(MenuItem menuItem){
+        //Create fragment for various item selected
+        Fragment fragment = null;
+        Class fragmentClass;
+        switch (menuItem.getItemId()){
+            case R.id.nav_home:
+                Toast.makeText(getApplicationContext(),"Home",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_notification:
+                Toast.makeText(getApplicationContext(),"Navigation",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_favorites:
+                Toast.makeText(getApplicationContext(),"Favorite",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_myprofile:
+                Toast.makeText(getApplicationContext(),"Profile",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_setting:
+                Toast.makeText(getApplicationContext(),"Setting",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_logout:
+                Toast.makeText(getApplicationContext(),"Logout",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_newpost:
+                Toast.makeText(getApplicationContext(),"NewPost",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_rentseeker:
+                Toast.makeText(getApplicationContext(),"You are rent seeker!",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_owner:
+                Toast.makeText(getApplicationContext(),"You are Owner!",Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                Toast.makeText(getApplicationContext(),"Hello",Toast.LENGTH_SHORT).show();
+        }
+        /*try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();*/
+
+        // Highlight the selected item has been done by NavigationView
+        menuItem.setChecked(true);
+        // Set action bar title
+        //setTitle(menuItem.getTitle());
+        // Close the navigation drawer
+        mDrawerLayout.closeDrawers();
     }
 
 
@@ -270,6 +358,14 @@ public class MainHome extends AppCompatActivity{
 
         // Activate the navigation drawer toggle
         if (mDrawerToggle.onOptionsItemSelected(item)) {
+            Blurry.with(getApplicationContext()).radius(15).sampling(2).async()
+                        .onto((ViewGroup) findViewById(R.id.nestedViewPost));
+            CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) fab.getLayoutParams();
+            p.setBehavior(null);
+            //p.setAnchorId(View.NO_ID);
+            fab.setLayoutParams(p);
+            fab.setVisibility(View.INVISIBLE);
+            //fab.hide();
             return true;
         }
         return super.onOptionsItemSelected(item);

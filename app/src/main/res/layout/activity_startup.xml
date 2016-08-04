@@ -54,7 +54,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/quesmark"
+                android:background="@drawable/ic_help_outline"
                 android:id="@+id/quesinfo"/>
         </LinearLayout>
         <RadioGroup
@@ -70,6 +70,7 @@
                 android:text="Rent seeker"
                 android:button="@drawable/customradio"
                 android:id="@+id/selectedrentseeker"
+                android:buttonTint="@android:color/holo_green_light"
                 android:checked="true"
                 android:textColor="#FFFFFF"
                 />
@@ -80,6 +81,7 @@
                 android:button="@drawable/customradio"
                 android:paddingLeft="10dp"
                 android:text="Owner"
+                android:buttonTint="@android:color/holo_green_light"
                 android:paddingTop="10dp"
                 android:id="@+id/selectedowner"
                 android:checked="false"

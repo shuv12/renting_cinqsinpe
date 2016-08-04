@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black"
+            android:title="Home"/>
+        <item
+            android:title="Notifications"
+            android:icon="@drawable/ic_notifications"
+            android:id="@+id/nav_notification"/>
+        <item
+            android:icon="@drawable/ic_favorite_black"
+            android:title="Favourites"
+            android:id="@+id/nav_favorites"/>
+        <item
+            android:icon="@drawable/ic_perm_identity"
+            android:id="@+id/nav_myprofile"
+            android:title="My Profile"/>
+        <item
+            android:title="Setting"
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_setting_dark"/>
+        <item
+            android:icon="@drawable/ic_logout"
+            android:id="@+id/nav_logout"
+            android:title="Logout"/>
+        <item android:title="Make a new post"
+            android:id="@+id/nav_newpost"
+            android:icon="@drawable/ic_open_in_new"
+            />
+    </group>
+
+
+    <item android:title="View As :">
+        <menu>
+            <group
+                android:checkableBehavior="single">
+                <item
+                    android:title="Rent Seeker"
+                    android:id="@+id/nav_rentseeker"
+                    android:icon="@drawable/ic_check_white"/>
+
+                <item
+                    android:id="@+id/nav_owner"
+                    android:title="Owner"
+                    android:icon="@drawable/ic_check_white"/>
+            </group>
+        </menu>
+
+    </item>
+
+</menu>

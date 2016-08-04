@@ -21,7 +21,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.WithAction">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".startup"
             android:screenOrientation="portrait"
@@ -38,7 +38,7 @@
         <activity
             android:name=".login"
             android:theme="@style/AppTheme" />
-        <activity android:name=".MainHome"/>
+        <activity android:name=".MainHome" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
