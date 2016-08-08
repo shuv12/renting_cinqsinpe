@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Contact Preferences">
+        <SwitchPreference
+            android:title="Show your contact number"
+            android:key="contact_show_preference"
+            />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="In app">
+        <SwitchPreference
+            android:title="Notification"
+            android:key="notification_pref"/>
+        <SwitchPreference
+            android:title="Sound"
+            android:key="sound_pref"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Other">
+        <ListPreference
+            android:title="About us"
+            android:key="about_us"
+            android:dialogMessage="@string/aboutus"
+            android:dialogTitle="About us"
+            android:entries="@array/aboutusarray"
+            android:entryValues="@array/aboutusarray"/>
+        <Preference
+            android:title="Send us feedback">
+            <intent android:action="android.intent.action.SEND"
+                android:data="rentma@gmail.com"
+                android:mimeType="text/plain"
+                />
+        </Preference>
+        <ListPreference
+            android:title="Terms and Conditions"
+            android:key="tnc"
+            android:dialogMessage="@string/tnc"
+            android:dialogTitle="Terms and Conditions"
+            android:entries="@array/tncarray"
+            android:entryValues="@array/tncarray"/>
+        <ListPreference
+            android:title="Privacy Policy"
+            android:key="pp"
+            android:dialogMessage="@string/tnc"
+            android:dialogTitle="Privacy Policy"
+            android:entryValues="@array/tncarray"
+            android:entries="@array/tncarray"/>
+        <Preference
+            android:title="Share this app">
+            <intent
+                android:action="android.intent.action.SEND"
+                android:data="googleplay.rentma"
+                android:mimeType="text/plain"
+                />
+        </Preference>
+    </PreferenceCategory>
+</PreferenceScreen>

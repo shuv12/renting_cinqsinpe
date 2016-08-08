@@ -29,7 +29,15 @@
         <item>Logout</item>
         <item>Make a post</item>
     </string-array>
+    <string-array name="aboutusarray">
+        <item>We are Rentma..founded on January 2015 with just few developers to help people find rentals easily</item>
+    </string-array>
+    <string-array name="tncarray">
+        <item>By signing up, you will accept the Terms and Conditions and Privacy Policy</item>
+    </string-array>
     <string name="title_activity_get_location_maps">Map</string>
     <string name="postedtitle">Residential flat for rent in Newroad</string>
     <string name="subidha">Subidha yukta flat vadama</string>
+    <string name="queryhint">Search by location</string>
+    <string name="aboutus">We are Rentma..founded on January 2015 with just few developers to help people find rentals easily</string>
 </resources>

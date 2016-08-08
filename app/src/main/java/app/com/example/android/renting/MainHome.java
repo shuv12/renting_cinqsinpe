@@ -122,6 +122,8 @@ public class MainHome extends AppCompatActivity{
         fab_rotate_backward = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_backward_plus_icon);
 
 
+        SearchView searchView = (SearchView) findViewById(R.id.search_bar);
+        searchView.setQueryHint("Search by location");
 
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -261,6 +263,8 @@ public class MainHome extends AppCompatActivity{
         };
 
         mDrawerToggle.setDrawerIndicatorEnabled(true);
+        mDrawerLayout.setBackgroundColor(getResources().getColor(R.color.orange));
+        mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.orange));
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
@@ -270,31 +274,44 @@ public class MainHome extends AppCompatActivity{
         Class fragmentClass;
         switch (menuItem.getItemId()){
             case R.id.nav_home:
+                final RentAdapter rentAdapter = new RentAdapter(getApplicationContext(),this.rentList);
+                recyclerView.setAdapter(rentAdapter);
+                recyclerView.setLayoutManager(layoutManager);
                 Toast.makeText(getApplicationContext(),"Home",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_notification:
-                Toast.makeText(getApplicationContext(),"Navigation",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Notification",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_favorites:
+                final FavouritesAdapter favouritesAdapter = new FavouritesAdapter(getApplicationContext(),this.rentList);
+                recyclerView.setAdapter(favouritesAdapter);
+                recyclerView.setLayoutManager(layoutManager);
+
                 Toast.makeText(getApplicationContext(),"Favorite",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_myprofile:
                 Toast.makeText(getApplicationContext(),"Profile",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_setting:
+                Intent intent = new Intent(getApplicationContext(),Setting.class);
+                startActivity(intent);
                 Toast.makeText(getApplicationContext(),"Setting",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_logout:
+                Intent i = new Intent(getApplicationContext(),login.class);
+                startActivity(i);
                 Toast.makeText(getApplicationContext(),"Logout",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_newpost:
+                Intent intent1 = new Intent(getApplicationContext(),NewPost.class);
+                startActivity(intent1);
                 Toast.makeText(getApplicationContext(),"NewPost",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_rentseeker:
-                Toast.makeText(getApplicationContext(),"You are rent seeker!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Viewing as rent seeker!",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_owner:
-                Toast.makeText(getApplicationContext(),"You are Owner!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Viewing as Owner!",Toast.LENGTH_SHORT).show();
                 break;
             default:
                 Toast.makeText(getApplicationContext(),"Hello",Toast.LENGTH_SHORT).show();
@@ -333,6 +350,8 @@ public class MainHome extends AppCompatActivity{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
@@ -346,13 +365,17 @@ public class MainHome extends AppCompatActivity{
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        //if (id == R.id.action_settings) {
+          //  return true;
+       // }
 
         if (id == R.id.show_marker_map) {
             Intent i = new Intent(getApplicationContext(), MapsActivity.class);
             startActivity(i);
+            return true;
+        }
+
+        if (id == R.id.show_filter){
             return true;
         }
 
